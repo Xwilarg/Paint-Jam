@@ -1,12 +1,18 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class FovManager : MonoBehaviour
 {
     [SerializeField]
     private Material fov;
 
-    [SerializeField]
-    private Transform player;
+    private IEnumerable<SecurityCamera> cameras;
+
+    private void Start()
+    {
+        cameras = GameObject.FindGameObjectsWithTag("SecurityCamera").ToList().Select(x => x.GetComponent<SecurityCamera>());
+    }
 
     private void OnPostRender()
     {
@@ -14,18 +20,20 @@ public class FovManager : MonoBehaviour
         fov.SetPass(0);
         GL.LoadOrtho();
         GL.Begin(GL.TRIANGLE_STRIP);
-        Vector3 mousePos = Input.mousePosition - new Vector3(25f, 25f);
-        Vector2? last = null;
-        for (int i = 0; i < 50; i++)
+        foreach (SecurityCamera cam in cameras)
         {
-            RaycastHit2D hit = Physics2D.Raycast(player.position, Camera.main.ViewportToWorldPoint(new Vector3(mousePos.x / Screen.width, mousePos.y / Screen.height, 0)), float.MaxValue, 1 << 8);
-            mousePos += new Vector3(1f, 1f);
-            if (last == null)
+            Vector2? last = null;
+            for (int i = 0; i < 360; i++)
             {
-                last = hit.point;
-                continue;
+                float fI = i * (2f * Mathf.PI) / 360f;
+                RaycastHit2D hit = Physics2D.Raycast(cam.transform.position, cam.transform.position + new Vector3(Mathf.Cos(fI), Mathf.Sin(fI)), float.MaxValue, 1 << 8);
+                if (last == null)
+                {
+                    last = hit.point;
+                    continue;
+                }
+                DrawTriangle(cam.transform.position, last.Value, hit.point);
             }
-            DrawTriangle(player.transform.position, last.Value, hit.point);
         }
         GL.End();
         GL.PopMatrix();
