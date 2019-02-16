@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
@@ -9,6 +10,9 @@ public class Enemy : MonoBehaviour
     private const float speed = 100f;
     private const float distNext = .1f;
     private Rigidbody2D rb;
+    private SpriteRenderer sr;
+
+    public bool IsEnable { set; private get; }
 
     private NextNode nextNode;
 
@@ -22,6 +26,8 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        IsEnable = false;
         var allNodes = GameObject.FindGameObjectsWithTag("Node");
         GameObject node = null;
         float dist = 0f;
@@ -39,6 +45,9 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        sr.enabled = IsEnable;
+        if (IsEnable)
+            IsEnable = false;
         int x = 0, y = 0;
         if (transform.position.x - nextNode.transform.position.x < -distNext)
             x = 1;
