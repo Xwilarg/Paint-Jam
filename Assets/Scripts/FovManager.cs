@@ -26,7 +26,7 @@ public class FovManager : MonoBehaviour
             for (int i = 0; i < 360; i++)
             {
                 float fI = i * (2f * Mathf.PI) / 360f;
-                RaycastHit2D hit = Physics2D.Raycast(cam.transform.position, cam.transform.position + new Vector3(Mathf.Cos(fI), Mathf.Sin(fI)), float.MaxValue, 1 << 8);
+                RaycastHit2D hit = Physics2D.Raycast(cam.transform.position, cam.transform.position + new Vector3(Mathf.Cos(fI), Mathf.Sin(fI)) * 10f, float.MaxValue, 1 << 8);
                 if (last == null)
                 {
                     last = hit.point;
