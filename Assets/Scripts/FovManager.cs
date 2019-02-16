@@ -7,6 +7,9 @@ public class FovManager : MonoBehaviour
     [SerializeField]
     private Material fov;
 
+    [SerializeField]
+    private GameObject player;
+
     private SecurityCamera camera;
 
     public void SetCamera(SecurityCamera cam)
@@ -29,21 +32,38 @@ public class FovManager : MonoBehaviour
         GL.Begin(GL.TRIANGLE_STRIP);
         if (camera != null)
         {
-            Vector2? last = null;
+            Vector2? last2 = null;
             for (int i = 0; i < 360; i++)
             {
                 float fI = i * (2f * Mathf.PI) / 360f;
                 RaycastHit2D hit = Physics2D.Raycast(camera.transform.position, camera.transform.position + new Vector3(Mathf.Cos(fI), Mathf.Sin(fI)) * 10f, float.MaxValue, (1 << 8) | (1 << 11));
                 if (hit.collider.CompareTag("Enemy"))
                     hit.collider.GetComponent<Enemy>().IsEnable = true;
-                if (last == null)
+                if (last2 == null)
                 {
-                    last = hit.point;
+                    last2 = hit.point;
                     continue;
                 }
-                DrawTriangle(camera.transform.position, last.Value, hit.point);
-                last = hit.point;
+                DrawTriangle(camera.transform.position, last2.Value, hit.point);
+                last2 = hit.point;
             }
+        }
+        GL.End();
+        GL.Begin(GL.TRIANGLE_STRIP);
+        Vector2? last = null;
+        for (int i = 0; i < 360; i++)
+        {
+            float fI = i * (2f * Mathf.PI) / 360f;
+            RaycastHit2D hit = Physics2D.Raycast(player.transform.position, player.transform.position + new Vector3(Mathf.Cos(fI), Mathf.Sin(fI)) * 10f, float.MaxValue, (1 << 8) | (1 << 11));
+            if (hit.collider.CompareTag("Enemy"))
+                hit.collider.GetComponent<Enemy>().IsEnable = true;
+            if (last == null)
+            {
+                last = hit.point;
+                continue;
+            }
+            DrawTriangle(player.transform.position, last.Value, hit.point);
+            last = hit.point;
         }
         GL.End();
         GL.PopMatrix();

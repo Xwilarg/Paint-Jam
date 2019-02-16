@@ -13880,6 +13880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fov: {fileID: 2100000, guid: bc48a14979d904f4d90d00c9f060d792, type: 2}
+  player: {fileID: 1768615836}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
