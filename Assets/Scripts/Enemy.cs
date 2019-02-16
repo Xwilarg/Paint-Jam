@@ -2,6 +2,8 @@
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
@@ -11,9 +13,14 @@ public class Enemy : MonoBehaviour
     private const float distNext = .1f;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
+    private AudioSource source;
+    private BoxCollider2D bc;
 
     [SerializeField]
     private Sprite[] up, down, left, right;
+
+    [SerializeField]
+    private AudioClip[] spawnClip, deathClip;
 
     public bool IsEnable { set; private get; }
 
@@ -23,13 +30,20 @@ public class Enemy : MonoBehaviour
     {
         Instantiate(blood, new Vector3(transform.position.x, transform.position.y, -5f), Quaternion.identity);
         Camera.main.GetComponent<Shake>().ShakeCamera();
-        Destroy(gameObject);
+        bc.enabled = false;
+        sr.sprite = null;
+        source.clip = deathClip[Random.Range(0, deathClip.Length)];
+        source.volume = 1f;
+        source.Play();
+        Destroy(gameObject, 2f);
     }
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        source = GetComponent<AudioSource>();
+        bc = GetComponent<BoxCollider2D>();
         IsEnable = false;
         var allNodes = GameObject.FindGameObjectsWithTag("Node");
         GameObject node = null;
@@ -44,6 +58,8 @@ public class Enemy : MonoBehaviour
             }
         }
         nextNode = node.GetComponent<NextNode>();
+        source.clip = spawnClip[Random.Range(0, spawnClip.Length)];
+        source.Play();
     }
 
     private void Update()
