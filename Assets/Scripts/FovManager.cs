@@ -7,11 +7,18 @@ public class FovManager : MonoBehaviour
     [SerializeField]
     private Material fov;
 
-    private IEnumerable<SecurityCamera> cameras;
+    private SecurityCamera camera;
+
+    public void SetCamera(SecurityCamera cam)
+    {
+        if (camera != null)
+            Destroy(camera.gameObject);
+        camera = cam;
+    }
 
     private void Start()
     {
-        cameras = GameObject.FindGameObjectsWithTag("SecurityCamera").ToList().Select(x => x.GetComponent<SecurityCamera>());
+        camera = null;
     }
 
     private void OnPostRender()
@@ -20,13 +27,13 @@ public class FovManager : MonoBehaviour
         fov.SetPass(0);
         GL.LoadOrtho();
         GL.Begin(GL.TRIANGLE_STRIP);
-        foreach (SecurityCamera cam in cameras)
+        if (camera != null)
         {
             Vector2? last = null;
             for (int i = 0; i < 360; i++)
             {
                 float fI = i * (2f * Mathf.PI) / 360f;
-                RaycastHit2D hit = Physics2D.Raycast(cam.transform.position, cam.transform.position + new Vector3(Mathf.Cos(fI), Mathf.Sin(fI)) * 10f, float.MaxValue, (1 << 8) | (1 << 11));
+                RaycastHit2D hit = Physics2D.Raycast(camera.transform.position, camera.transform.position + new Vector3(Mathf.Cos(fI), Mathf.Sin(fI)) * 10f, float.MaxValue, (1 << 8) | (1 << 11));
                 if (hit.collider.CompareTag("Enemy"))
                     hit.collider.GetComponent<Enemy>().IsEnable = true;
                 if (last == null)
@@ -34,7 +41,7 @@ public class FovManager : MonoBehaviour
                     last = hit.point;
                     continue;
                 }
-                DrawTriangle(cam.transform.position, last.Value, hit.point);
+                DrawTriangle(camera.transform.position, last.Value, hit.point);
                 last = hit.point;
             }
         }
