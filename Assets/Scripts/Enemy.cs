@@ -12,6 +12,9 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sr;
 
+    [SerializeField]
+    private Sprite[] up, down, left, right;
+
     public bool IsEnable { set; private get; }
 
     private NextNode nextNode;
@@ -45,9 +48,6 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        sr.enabled = IsEnable;
-        if (IsEnable)
-            IsEnable = false;
         int x = 0, y = 0;
         if (transform.position.x - nextNode.transform.position.x < -distNext)
             x = 1;
@@ -61,5 +61,19 @@ public class Enemy : MonoBehaviour
             nextNode = nextNode.GetNextNode();
         else
             rb.velocity = new Vector2(x, y) * Time.deltaTime * speed;
+        if (IsEnable)
+        {
+            if (y == 1)
+                sr.sprite = up[Random.Range(0, up.Length)];
+            else if (y == -1)
+                sr.sprite = down[Random.Range(0, down.Length)];
+            else if (x == -1)
+                sr.sprite = left[Random.Range(0, left.Length)];
+            else if (x == 1)
+                sr.sprite = right[Random.Range(0, right.Length)];
+        }
+        sr.enabled = IsEnable;
+        if (IsEnable)
+            IsEnable = false;
     }
 }
