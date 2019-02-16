@@ -13,10 +13,8 @@ public class FovManager : MonoBehaviour
         GL.PushMatrix();
         fov.SetPass(0);
         GL.LoadOrtho();
-
         GL.Begin(GL.TRIANGLE_STRIP);
         Vector3 mousePos = Input.mousePosition - new Vector3(25f, 25f);
-        GL.Color(Color.yellow);
         Vector2? last = null;
         for (int i = 0; i < 50; i++)
         {
