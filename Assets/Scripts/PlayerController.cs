@@ -23,5 +23,7 @@ public class PlayerController : MonoBehaviour
             GameObject go = Instantiate(bullet, transform.position, Quaternion.identity);
             go.GetComponent<Rigidbody2D>().AddForce(-Vector3.Normalize(transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)) * fireForce, ForceMode2D.Impulse);
         }
+        if (Input.GetKeyDown(KeyCode.R))
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Main");
     }
 }
