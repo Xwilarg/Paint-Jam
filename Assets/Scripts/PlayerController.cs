@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))]
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private AudioSource source;
     private const float speed = 300f;
     private const float fireForce = 2.9f;
     private const float bulletNb = 10f;
@@ -19,9 +21,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private FovManager fov;
 
+    [SerializeField]
+    private AudioClip[] fireClip;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        source = GetComponent<AudioSource>();
         reloadTime = 0f;
         reloadTimeSec = 0f;
     }
@@ -41,6 +47,8 @@ public class PlayerController : MonoBehaviour
                 go.GetComponent<Rigidbody2D>().AddForce(-Vector3.Normalize(Vector3.Normalize(dist) +
                     new Vector3(Random.Range(-shootRange, shootRange), Random.Range(-shootRange, shootRange))) * fireForce, ForceMode2D.Impulse);
             }
+            source.clip = fireClip[Random.Range(0, fireClip.Length)];
+            source.Play();
         }
         if (Input.GetButtonDown("Fire2") && reloadTimeSec < 0f)
         {
