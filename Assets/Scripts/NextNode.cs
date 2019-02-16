@@ -7,6 +7,8 @@ public class NextNode : MonoBehaviour
 
     public NextNode GetNextNode()
     {
+        if (next.Length == 0)
+            return (this);
         return (next[Random.Range(0, next.Length)]);
     }
 }
