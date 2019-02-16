@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private const float speed = 300f;
-    private const float fireForce = 5f;
+    private const float fireForce = 2.9f;
     private const float bulletNb = 10f;
     private const float shootRange = .5f;
     private const float refReload = 1f;
