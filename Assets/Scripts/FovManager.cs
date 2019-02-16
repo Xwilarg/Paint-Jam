@@ -26,13 +26,16 @@ public class FovManager : MonoBehaviour
             for (int i = 0; i < 360; i++)
             {
                 float fI = i * (2f * Mathf.PI) / 360f;
-                RaycastHit2D hit = Physics2D.Raycast(cam.transform.position, cam.transform.position + new Vector3(Mathf.Cos(fI), Mathf.Sin(fI)) * 10f, float.MaxValue, 1 << 8);
+                RaycastHit2D hit = Physics2D.Raycast(cam.transform.position, cam.transform.position + new Vector3(Mathf.Cos(fI), Mathf.Sin(fI)) * 10f, float.MaxValue, (1 << 8) | (1 << 11));
+                if (hit.collider.CompareTag("Enemy"))
+                    hit.collider.GetComponent<Enemy>().IsEnable = true;
                 if (last == null)
                 {
                     last = hit.point;
                     continue;
                 }
                 DrawTriangle(cam.transform.position, last.Value, hit.point);
+                last = hit.point;
             }
         }
         GL.End();

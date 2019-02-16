@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1538933553676050686}
   - component: {fileID: 1538933553676050687}
   - component: {fileID: 1538933553676050683}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538933553676050672}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -141,3 +141,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a3838d8c7a47642b9d9e95a29f97fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blood: {fileID: 9043571891915189526, guid: d7b745a81bb757041b4c83d72921c303, type: 3}
