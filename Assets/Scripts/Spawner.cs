@@ -15,7 +15,7 @@ public class Spawner : MonoBehaviour
         if (timer < 0f)
         {
             Instantiate(toSpawn[Random.Range(0, toSpawn.Length)], transform.position, Quaternion.identity);
-            if (spawnRef > 2f)
+            if (spawnRef > 3f)
                 spawnRef -= .5f;
             timer = spawnRef;
         }
