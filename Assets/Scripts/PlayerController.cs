@@ -6,10 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private AudioSource source;
-    private const float speed = 300f;
-    private const float fireForce = 2.9f;
-    private const float bulletNb = 10f;
-    private const float shootRange = .5f;
+    private const float speed = 250f;
+    private const float fireForce = 4f;
+    private const float bulletNb = 5f;
+    private const float shootRange = .3f;
     private const float refReload = 1f;
     private const float refReloadSec = 2f;
     private float reloadTime;

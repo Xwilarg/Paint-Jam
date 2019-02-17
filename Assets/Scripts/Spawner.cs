@@ -5,7 +5,7 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private GameObject[] toSpawn;
 
-    private const float spawnRef = 2f;
+    private const float spawnRef = 4f;
     [SerializeField]
     private float timer;
 
