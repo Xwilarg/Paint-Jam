@@ -17,7 +17,10 @@ public class HealthManager : MonoBehaviour
     private Image[] healthRemaining;
 
     [SerializeField]
-    private Image[] glass;
+    private Sprite[] glass;
+
+    [SerializeField]
+    private SpriteRenderer glassRenderer;
 
     private int index;
     private int glass_index;
@@ -28,11 +31,8 @@ public class HealthManager : MonoBehaviour
     {
         timer_score = 0f;
         index = healthRemaining.Length - 1;
-        glass_index = glass.Length - 1;
+        glass_index = 0;
         source = GetComponent<AudioSource>();
-        glass[glass_index - 1].enabled = false;
-        glass[glass_index - 2].enabled = false;
-        glass[glass_index - 3].enabled = false;
     }
 
     private void Update()
@@ -58,11 +58,12 @@ public class HealthManager : MonoBehaviour
                 return;
             }
             healthRemaining[index].enabled = false;
-            glass[glass_index].enabled = false;
-            if (glass_index != 0)
-                glass[glass_index - 1].enabled = true;
+            if (glass_index >= glass.Length)
+                glassRenderer.enabled = false;
+            else
+                glassRenderer.sprite = glass[glass_index];
+            glass_index++;
             index--;
-            glass_index--;
             source.clip = clips[Random.Range(0, clips.Length)];
             source.Play();
             Destroy(collision.gameObject);

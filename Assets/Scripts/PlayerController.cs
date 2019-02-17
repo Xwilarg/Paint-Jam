@@ -58,8 +58,8 @@ public class PlayerController : MonoBehaviour
             reloadTime = refReload;
             for (int i = 0; i < bulletNb; i++)
             {
-                GameObject go = Instantiate(bullet, transform.position, Quaternion.identity);
-                Vector2 dist = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                GameObject go = Instantiate(bullet, transform.position + new Vector3(0f, -.25f, 0f), Quaternion.identity);
+                Vector2 dist = transform.position + new Vector3(0f, -.25f, 0f) - Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 go.GetComponent<Rigidbody2D>().AddForce(-Vector3.Normalize(Vector3.Normalize(dist) +
                     new Vector3(Random.Range(-shootRange, shootRange), Random.Range(-shootRange, shootRange))) * fireForce, ForceMode2D.Impulse);
             }
@@ -69,8 +69,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Fire2") && reloadTimeSec < 0f)
         {
             reloadTimeSec = refReloadSec;
-            GameObject go = Instantiate(securityCamera, transform.position, Quaternion.identity);
-            Vector2 dist = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            GameObject go = Instantiate(securityCamera, transform.position + new Vector3(0f, -.25f, 0f), Quaternion.identity);
+            Vector2 dist = transform.position + new Vector3(0f, -.25f, 0f) - Camera.main.ScreenToWorldPoint(Input.mousePosition);
             go.GetComponent<Rigidbody2D>().AddForce(-Vector3.Normalize(dist) * fireForce, ForceMode2D.Impulse);
             fov.SetCamera(go.GetComponent<SecurityCamera>());
         }
