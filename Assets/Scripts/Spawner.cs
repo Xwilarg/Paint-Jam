@@ -5,7 +5,7 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private GameObject[] toSpawn;
 
-    private const float spawnRef = 4f;
+    private float spawnRef = 10f;
     [SerializeField]
     private float timer;
 
@@ -15,6 +15,8 @@ public class Spawner : MonoBehaviour
         if (timer < 0f)
         {
             Instantiate(toSpawn[Random.Range(0, toSpawn.Length)], transform.position, Quaternion.identity);
+            if (spawnRef > 2f)
+                spawnRef -= .5f;
             timer = spawnRef;
         }
     }
