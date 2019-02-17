@@ -6,7 +6,7 @@ public class Star : MonoBehaviour
 
     private void Start()
     {
-        speed = Random.Range(-40f, 40f);
+        speed = Random.Range(-100f, 100f);
     }
 
     private void Update()
