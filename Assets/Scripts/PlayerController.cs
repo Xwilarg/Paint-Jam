@@ -2,10 +2,12 @@
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private AudioSource source;
+    private SpriteRenderer sr;
     private const float speed = 250f;
     private const float fireForce = 4f;
     private const float bulletNb = 5f;
@@ -14,6 +16,9 @@ public class PlayerController : MonoBehaviour
     private const float refReloadSec = 1f;
     private float reloadTime;
     private float reloadTimeSec;
+
+    [SerializeField]
+    private Sprite upSprite, downSprite, leftSprite, rightSprite;
 
     [SerializeField]
     private GameObject bullet, securityCamera;
@@ -28,13 +33,24 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         source = GetComponent<AudioSource>();
+        sr = GetComponent<SpriteRenderer>();
         reloadTime = 0f;
         reloadTimeSec = 0f;
     }
 
     private void Update()
     {
-        rb.velocity = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * Time.deltaTime * speed;
+        float hor = Input.GetAxis("Horizontal");
+        float ver = Input.GetAxis("Vertical");
+        if (ver > .5f)
+            sr.sprite = upSprite;
+        else if (ver < -.5)
+            sr.sprite = downSprite;
+        else if (hor > .5f)
+            sr.sprite = rightSprite;
+        else if (hor < -.5f)
+            sr.sprite = leftSprite;
+        rb.velocity = new Vector2(hor, ver) * Time.deltaTime * speed;
         reloadTime -= Time.deltaTime;
         reloadTimeSec -= Time.deltaTime;
         if (Input.GetButtonDown("Fire1") && reloadTime < 0f)

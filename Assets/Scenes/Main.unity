@@ -23278,11 +23278,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1930938133
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 47655b3785829754989229e6ababe784, type: 3}
-  m_Color: {r: 0.19447756, g: 0, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 8db1011442330a44fa36f6fa77241335, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -23301,7 +23301,7 @@ Transform:
   m_GameObject: {fileID: 1768615836}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.71, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -23319,18 +23319,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.017637197, y: -0.19665498}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 0.58, y: 0.53}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 0.11188082, y: 0.13480926}
   m_EdgeRadius: 0
 --- !u!50 &1768615840
 Rigidbody2D:
@@ -23365,6 +23365,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 228a3bfa1ce71984089c5bff2916bdb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upSprite: {fileID: 21300000, guid: 38f173f87d0114c43aa8334d2b856abe, type: 3}
+  downSprite: {fileID: 21300000, guid: 8db1011442330a44fa36f6fa77241335, type: 3}
+  leftSprite: {fileID: 21300000, guid: 6b048d205432fbb4c90aa068655e37ff, type: 3}
+  rightSprite: {fileID: 21300000, guid: 813a1a88216396b44916a9dfdfacff6c, type: 3}
   bullet: {fileID: 7828952036216995507, guid: b1ba5d0e4f169b94993af362db70a07c, type: 3}
   securityCamera: {fileID: 3432382527924437022, guid: 3a280305903772346ae9406892f942e7,
     type: 3}
