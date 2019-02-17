@@ -17,25 +17,26 @@ public class HealthManager : MonoBehaviour
     private Image[] healthRemaining;
 
     private int index;
-    private float timer;
+    private float timer_score;
     private AudioSource source;
 
     private void Start()
     {
+        timer_score = 0f;
         index = healthRemaining.Length - 1;
         source = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
-        timerText.text = "You survived " + (int)(timer) + " seconds";
+        timer_score += Time.deltaTime;
+        timerText.text = "You survived " + (int)(timer_score) + " seconds";
     }
 
     private void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
-        GameObject.FindGameObjectWithTag("GameOverText").GetComponent<Text>().text = "Game Over\nYou survived " + (int)(timer) + " seconds.\n\nPress enter to go back to the main menu.";
-        Destroy(gameObject);
+        GameObject.FindGameObjectWithTag("GameOverText").GetComponent<Text>().text = "Game Over\nYou survived " + (int)(timer_score) + " seconds.\n\nPress enter to go back to the main menu.";
+        timer_score = 0f;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
