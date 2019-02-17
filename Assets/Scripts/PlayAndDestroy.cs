@@ -2,8 +2,11 @@
 
 public class PlayAndDestroy : MonoBehaviour
 {
+    [SerializeField]
+    private float timer = 2f;
+
     private void Start()
     {
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, timer);
     }
 }

@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private const float bulletNb = 5f;
     private const float shootRange = .3f;
     private const float refReload = 1f;
-    private const float refReloadSec = 2f;
+    private const float refReloadSec = 1f;
     private float reloadTime;
     private float reloadTimeSec;
 
