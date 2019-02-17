@@ -20120,7 +20120,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   next:
-  - {fileID: 1378599124}
   - {fileID: 2033697450}
 --- !u!1 &1558935417
 GameObject:
@@ -20302,7 +20301,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   next:
-  - {fileID: 620305392}
   - {fileID: 864487479}
 --- !u!1 &1768615836
 GameObject:
@@ -20661,6 +20659,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7109997781692297002, guid: 06d511e3a7f5aa84e87598e3fb202ec1,
+        type: 3}
+      propertyPath: timer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06d511e3a7f5aa84e87598e3fb202ec1, type: 3}
 --- !u!1001 &6064093090924844367
@@ -20729,6 +20732,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7109997781692297002, guid: 06d511e3a7f5aa84e87598e3fb202ec1,
+        type: 3}
+      propertyPath: timer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06d511e3a7f5aa84e87598e3fb202ec1, type: 3}
