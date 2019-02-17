@@ -54,7 +54,7 @@ public class FovManager : MonoBehaviour
         for (int i = 0; i < 360; i++)
         {
             float fI = i * (2f * Mathf.PI) / 360f;
-            RaycastHit2D hit = Physics2D.Raycast(player.transform.position, player.transform.position + new Vector3(Mathf.Cos(fI), Mathf.Sin(fI)) * 10f, float.MaxValue, (1 << 8) | (1 << 11));
+            RaycastHit2D hit = Physics2D.Raycast(player.transform.position + new Vector3(0f, -.25f, 0f), player.transform.position + new Vector3(Mathf.Cos(fI), Mathf.Sin(fI)) * 10f, float.MaxValue, (1 << 8) | (1 << 11));
             if (hit.collider.CompareTag("Enemy"))
                 hit.collider.GetComponent<Enemy>().IsEnable = true;
             if (last == null)
