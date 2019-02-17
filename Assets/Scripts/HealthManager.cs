@@ -30,10 +30,10 @@ public class HealthManager : MonoBehaviour
         index = healthRemaining.Length - 1;
         glass_index = glass.Length - 1;
         source = GetComponent<AudioSource>();
+        glass[glass_index].enabled = false;
         glass[glass_index - 1].enabled = false;
         glass[glass_index - 2].enabled = false;
         glass[glass_index - 3].enabled = false;
-        glass[glass_index - 4].enabled = false;
     }
 
     private void Update()
