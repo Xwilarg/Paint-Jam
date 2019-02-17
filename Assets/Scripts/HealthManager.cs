@@ -42,7 +42,7 @@ public class HealthManager : MonoBehaviour
     {
         if (collision.collider.CompareTag("Enemy"))
         {
-            if (index == -1)
+            if (index == 0)
             {
                 SceneManager.sceneLoaded += OnSceneLoad;
                 SceneManager.LoadScene("GameEnd");
